@@ -49,7 +49,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    window.scrollTo({ top: target.offsetTop - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72), behavior: 'smooth' });
+    const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
+    // getBoundingClientRect().top da la distancia al viewport; + scrollY = posición absoluta en la página
+    const top = target.getBoundingClientRect().top + window.scrollY - headerH;
+    window.scrollTo({ top, behavior: 'smooth' });
   });
 });
 

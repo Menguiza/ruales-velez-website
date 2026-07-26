@@ -205,18 +205,21 @@ address { font-style: normal; }
 
 /* Scroll hint */
 .hero-scroll-hint {
-  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-  z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
-  animation: fade-in-up 1s ease 1.8s both;
+  position: absolute; bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0;
+  animation: hint-appear .6s ease 2s forwards;
 }
-@keyframes fade-in-up { from { opacity: 0; transform: translateX(-50%) translateY(16px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-.scroll-label { font-size: .6rem; letter-spacing: .2em; color: rgba(255,255,255,.55); font-weight: 600; }
+@keyframes hint-appear { to { opacity: 1; } }
+.scroll-label { font-size: .6rem; letter-spacing: .2em; color: rgba(255,255,255,.5); font-weight: 600; }
 .scroll-line-anim {
-  width: 1px; height: 52px;
-  background: linear-gradient(to bottom, rgba(255,255,255,.6), transparent);
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, rgba(255,255,255,.55), transparent);
   animation: scroll-pulse 1.8s ease-in-out infinite;
 }
-@keyframes scroll-pulse { 0%,100% { transform: scaleY(1); opacity:.6; } 50% { transform: scaleY(.5); opacity:.2; } }
+@keyframes scroll-pulse { 0%,100% { opacity: .55; } 50% { opacity: .1; } }
 
 /* ===== VALORES / STATS ===== */
 .values-bar { background: var(--dark-2); padding: 56px 0; }
