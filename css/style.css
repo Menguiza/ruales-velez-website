@@ -484,8 +484,8 @@ address { font-style: normal; }
   padding: 8px;
 }
 .footer-brand-desc {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.5);
+  font-size: 0.84rem;
+  color: rgba(255,255,255,0.75);
   line-height: 1.6;
   margin-top: 14px;
 }
@@ -503,8 +503,21 @@ address { font-style: normal; }
 .footer-links a  { font-size: 0.84rem; color: rgba(255,255,255,0.55); transition: color var(--transition); }
 .footer-links a:hover { color: var(--orange); }
 
-.social-link { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.55); font-size: 0.84rem; transition: color var(--transition); }
-.social-link i { font-size: 1.25rem; }
+.social-links { display: flex; flex-direction: column; gap: 14px; }
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.social-link i {
+  font-size: 1.3rem;
+  width: 28px;
+  text-align: center;
+}
 .social-link:hover { color: var(--orange); }
 
 .footer-bottom {
