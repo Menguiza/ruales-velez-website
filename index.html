@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
   <!-- SEO Primary -->
   <title>Ruales Vélez | Arquitectura, Diseño e Interventoría en Medellín</title>
   <meta name="description" content="Soluciones integrales en diseño, interventoría, obra civil, remodelación y mantenimiento en Medellín y el área metropolitana. Más de 10 años transformando espacios." />
@@ -17,7 +20,7 @@
   <meta property="og:url" content="https://menguiza.github.io/ruales-velez-website/" />
   <meta property="og:title" content="Ruales Vélez | Arquitectura, Diseño e Interventoría en Medellín" />
   <meta property="og:description" content="Transformamos espacios que mejoran tu vida. Más de 10 años de experiencia en diseño, interventoría y construcción en Medellín." />
-  <meta property="og:image" content="https://menguiza.github.io/ruales-velez-website/assets/logo.png" />
+  <meta property="og:image" content="https://menguiza.github.io/ruales-velez-website/assets/logo-horizontal.png" />
   <meta property="og:locale" content="es_CO" />
   <meta property="og:site_name" content="Ruales Vélez" />
 
@@ -32,7 +35,7 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Ruales Vélez Arquitectura, Diseño e Interventoría",
-    "description": "Soluciones integrales en diseño de interiores, interventoría, obra civil, remodelación y mantenimiento en Medellín y el área metropolitana.",
+    "description": "Soluciones integrales en diseño de interiores, interventoría, obra civil, remodelación y mantenimiento en Medellín.",
     "url": "https://menguiza.github.io/ruales-velez-website/",
     "telephone": "+573155377469",
     "email": "gerenciarualesvelez@gmail.com",
@@ -42,31 +45,13 @@
       "addressRegion": "Antioquia",
       "addressCountry": "CO"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "6.2442",
-      "longitude": "-75.5812"
-    },
+    "geo": { "@type": "GeoCoordinates", "latitude": "6.2442", "longitude": "-75.5812" },
     "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "08:00",
-        "closes": "18:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "08:00",
-        "closes": "12:00"
-      }
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "12:00" }
     ],
     "priceRange": "$$",
-    "sameAs": [
-      "https://www.instagram.com/",
-      "https://www.facebook.com/",
-      "https://www.linkedin.com/"
-    ]
+    "sameAs": ["https://www.instagram.com/","https://www.facebook.com/","https://www.linkedin.com/"]
   }
   </script>
 
@@ -82,7 +67,6 @@
 </head>
 <body>
 
-  <!-- Skip nav (accesibilidad) -->
   <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
   <!-- ===== HEADER ===== -->
@@ -90,7 +74,7 @@
     <nav class="nav-container" aria-label="Navegación principal">
 
       <a href="#inicio" class="nav-brand" aria-label="Ruales Vélez — Inicio">
-        <img src="assets/logo.png" alt="Logo Ruales Vélez" class="nav-logo" width="56" height="56" />
+        <img src="assets/logo-horizontal.png" alt="Ruales Vélez" class="nav-logo" />
       </a>
 
       <button class="nav-toggle" id="nav-toggle"
@@ -133,21 +117,17 @@
           obra civil, remodelación y mantenimiento<br />
           en Medellín y el área metropolitana.
         </p>
-        <div class="hero-ctas" role="group" aria-label="Llamadas a la acción">
+        <div class="hero-ctas" role="group">
           <a href="https://wa.me/573155377469?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto"
-             class="btn btn-whatsapp"
-             target="_blank" rel="noopener noreferrer"
-             aria-label="Escríbenos por WhatsApp (abre en nueva pestaña)">
+             class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer"
+             aria-label="Escríbenos por WhatsApp">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
             Escríbenos por WhatsApp
           </a>
-          <a href="#servicios" class="btn btn-outline-light">
-            Conoce nuestros servicios
-          </a>
+          <a href="#servicios" class="btn btn-outline-light">Conoce nuestros servicios</a>
         </div>
       </div>
-      <div class="hero-image"
-           role="img"
+      <div class="hero-image" role="img"
            aria-label="Espacio residencial diseñado por Ruales Vélez"
            style="background-image: url('assets/hero-interior.jpeg');">
         <div class="hero-image-inner">
@@ -156,7 +136,7 @@
       </div>
     </section>
 
-    <!-- BARRA DE VALORES -->
+    <!-- VALORES -->
     <section class="values-bar" aria-label="Pilares de Ruales Vélez">
       <div class="container">
         <div class="values-grid">
@@ -226,51 +206,126 @@
       </div>
     </section>
 
-    <!-- PROYECTOS -->
+    <!-- PROYECTOS — Slider Antes/Después -->
     <section id="proyectos" class="projects-section section" aria-labelledby="proyectos-heading">
       <div class="container">
         <header class="section-header">
           <h2 id="proyectos-heading" class="section-title">PROYECTOS</h2>
-          <p class="section-subtitle">Algunos proyectos que reflejan nuestro trabajo y compromiso.</p>
+          <p class="section-subtitle">Desliza sobre cada proyecto para ver la transformación.</p>
         </header>
+
         <div class="projects-grid">
-          <article class="project-card project-card--1" aria-label="Remodelación residencial, El Poblado, Medellín">
+
+          <!-- Card 1 -->
+          <article class="project-card" style="--split: 50%"
+                   aria-label="Remodelación residencial, El Poblado, Medellín">
+            <div class="ba-wrapper">
+              <div class="ba-before" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-after"  style="background-image:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-divider" aria-hidden="true">
+                <div class="ba-handle"><i class="fas fa-left-right"></i></div>
+              </div>
+              <span class="ba-label ba-label--before">ANTES</span>
+              <span class="ba-label ba-label--after">DESPUÉS</span>
+            </div>
             <div class="project-info">
               <h3>Remodelación residencial</h3>
               <p><i class="fas fa-location-dot" aria-hidden="true"></i> El Poblado, Medellín</p>
             </div>
           </article>
-          <article class="project-card project-card--2" aria-label="Diseño de interiores, La Estrella, Antioquia">
+
+          <!-- Card 2 -->
+          <article class="project-card" style="--split: 50%"
+                   aria-label="Diseño de interiores, La Estrella, Antioquia">
+            <div class="ba-wrapper">
+              <div class="ba-before" style="background-image:url('https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-after"  style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-divider" aria-hidden="true">
+                <div class="ba-handle"><i class="fas fa-left-right"></i></div>
+              </div>
+              <span class="ba-label ba-label--before">ANTES</span>
+              <span class="ba-label ba-label--after">DESPUÉS</span>
+            </div>
             <div class="project-info">
               <h3>Diseño de interiores</h3>
               <p><i class="fas fa-location-dot" aria-hidden="true"></i> La Estrella, Antioquia</p>
             </div>
           </article>
-          <article class="project-card project-card--3" aria-label="Interventoría de obra, Sabaneta, Antioquia">
+
+          <!-- Card 3 -->
+          <article class="project-card" style="--split: 50%"
+                   aria-label="Interventoría de obra, Sabaneta, Antioquia">
+            <div class="ba-wrapper">
+              <div class="ba-before" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-after"  style="background-image:url('https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-divider" aria-hidden="true">
+                <div class="ba-handle"><i class="fas fa-left-right"></i></div>
+              </div>
+              <span class="ba-label ba-label--before">ANTES</span>
+              <span class="ba-label ba-label--after">DESPUÉS</span>
+            </div>
             <div class="project-info">
               <h3>Interventoría de obra</h3>
               <p><i class="fas fa-location-dot" aria-hidden="true"></i> Sabaneta, Antioquia</p>
             </div>
           </article>
-          <article class="project-card project-card--4" aria-label="Adecuación comercial, Envigado, Antioquia">
+
+          <!-- Card 4 -->
+          <article class="project-card" style="--split: 50%"
+                   aria-label="Adecuación comercial, Envigado, Antioquia">
+            <div class="ba-wrapper">
+              <div class="ba-before" style="background-image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-after"  style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-divider" aria-hidden="true">
+                <div class="ba-handle"><i class="fas fa-left-right"></i></div>
+              </div>
+              <span class="ba-label ba-label--before">ANTES</span>
+              <span class="ba-label ba-label--after">DESPUÉS</span>
+            </div>
             <div class="project-info">
               <h3>Adecuación comercial</h3>
               <p><i class="fas fa-location-dot" aria-hidden="true"></i> Envigado, Antioquia</p>
             </div>
           </article>
-          <article class="project-card project-card--5" aria-label="Cocina y sala integrada, Laureles, Medellín">
+
+          <!-- Card 5 -->
+          <article class="project-card" style="--split: 50%"
+                   aria-label="Cocina y sala integrada, Laureles, Medellín">
+            <div class="ba-wrapper">
+              <div class="ba-before" style="background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-after"  style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-divider" aria-hidden="true">
+                <div class="ba-handle"><i class="fas fa-left-right"></i></div>
+              </div>
+              <span class="ba-label ba-label--before">ANTES</span>
+              <span class="ba-label ba-label--after">DESPUÉS</span>
+            </div>
             <div class="project-info">
               <h3>Cocina y sala integrada</h3>
               <p><i class="fas fa-location-dot" aria-hidden="true"></i> Laureles, Medellín</p>
             </div>
           </article>
-          <article class="project-card project-card--6" aria-label="Suite principal, El Retiro, Antioquia">
+
+          <!-- Card 6 -->
+          <article class="project-card" style="--split: 50%"
+                   aria-label="Suite principal, El Retiro, Antioquia">
+            <div class="ba-wrapper">
+              <div class="ba-before" style="background-image:url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-after"  style="background-image:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=75')"></div>
+              <div class="ba-divider" aria-hidden="true">
+                <div class="ba-handle"><i class="fas fa-left-right"></i></div>
+              </div>
+              <span class="ba-label ba-label--before">ANTES</span>
+              <span class="ba-label ba-label--after">DESPUÉS</span>
+            </div>
             <div class="project-info">
               <h3>Suite principal</h3>
               <p><i class="fas fa-location-dot" aria-hidden="true"></i> El Retiro, Antioquia</p>
             </div>
           </article>
+
         </div>
+
         <div class="projects-cta">
           <a href="#contacto" class="btn btn-primary">Ver más proyectos</a>
         </div>
@@ -281,12 +336,9 @@
     <section class="about-process-section section">
       <div class="container about-process-grid">
 
-        <!-- Sobre mí -->
         <div id="sobre-mi" class="about-col" aria-labelledby="sobre-heading">
-          <div class="about-photo" role="img" aria-label="Foto de Francisco Alejandro Ruales Vélez">
-            <div class="about-photo-inner">
-              <span class="about-initials">AR</span>
-            </div>
+          <div class="about-photo" role="img" aria-label="Francisco Alejandro Ruales Vélez">
+            <div class="about-photo-inner"><span class="about-initials">AR</span></div>
           </div>
           <div class="about-text">
             <h2 id="sobre-heading" class="section-title left">SOBRE MÍ</h2>
@@ -295,55 +347,33 @@
           </div>
         </div>
 
-        <!-- Proceso -->
         <div id="proceso" class="process-col" aria-labelledby="proceso-heading">
           <h2 id="proceso-heading" class="section-title">NUESTRO PROCESO</h2>
           <div class="process-steps" role="list">
-
             <div class="process-step" role="listitem">
               <div class="process-icon" aria-hidden="true"><i class="fas fa-comments"></i></div>
-              <div class="process-content">
-                <h3>1. ESCUCHAMOS</h3>
-                <p>Entendemos tus necesidades y objetivos.</p>
-              </div>
+              <div class="process-content"><h3>1. ESCUCHAMOS</h3><p>Entendemos tus necesidades y objetivos.</p></div>
             </div>
             <div class="process-connector" aria-hidden="true"></div>
-
             <div class="process-step" role="listitem">
               <div class="process-icon" aria-hidden="true"><i class="fas fa-pencil-ruler"></i></div>
-              <div class="process-content">
-                <h3>2. DISEÑAMOS</h3>
-                <p>Proponemos ideas y soluciones personalizadas.</p>
-              </div>
+              <div class="process-content"><h3>2. DISEÑAMOS</h3><p>Proponemos ideas y soluciones personalizadas.</p></div>
             </div>
             <div class="process-connector" aria-hidden="true"></div>
-
             <div class="process-step" role="listitem">
               <div class="process-icon" aria-hidden="true"><i class="fas fa-gears"></i></div>
-              <div class="process-content">
-                <h3>3. PLANIFICAMOS</h3>
-                <p>Organizamos cada etapa del proyecto contigo.</p>
-              </div>
+              <div class="process-content"><h3>3. PLANIFICAMOS</h3><p>Organizamos cada etapa del proyecto contigo.</p></div>
             </div>
             <div class="process-connector" aria-hidden="true"></div>
-
             <div class="process-step" role="listitem">
               <div class="process-icon" aria-hidden="true"><i class="fas fa-hammer"></i></div>
-              <div class="process-content">
-                <h3>4. EJECUTAMOS</h3>
-                <p>Construimos con calidad, control y cumplimiento.</p>
-              </div>
+              <div class="process-content"><h3>4. EJECUTAMOS</h3><p>Construimos con calidad, control y cumplimiento.</p></div>
             </div>
             <div class="process-connector" aria-hidden="true"></div>
-
             <div class="process-step" role="listitem">
               <div class="process-icon" aria-hidden="true"><i class="fas fa-circle-check"></i></div>
-              <div class="process-content">
-                <h3>5. ENTREGAMOS</h3>
-                <p>Entregamos un resultado que supera expectativas.</p>
-              </div>
+              <div class="process-content"><h3>5. ENTREGAMOS</h3><p>Entregamos un resultado que supera expectativas.</p></div>
             </div>
-
           </div>
         </div>
 
@@ -353,52 +383,33 @@
     <!-- CONTACTO -->
     <section id="contacto" class="contact-section" aria-labelledby="contacto-heading">
       <div class="container contact-grid">
-
         <div class="contact-cta">
-          <h2 id="contacto-heading">
-            ¿Listo para transformar<br />
-            <span class="text-orange">tu espacio?</span>
-          </h2>
+          <h2 id="contacto-heading">¿Listo para transformar<br /><span class="text-orange">tu espacio?</span></h2>
           <p>Hablemos de tu proyecto.</p>
           <a href="https://wa.me/573155377469?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto"
-             class="btn btn-whatsapp"
-             target="_blank" rel="noopener noreferrer">
+             class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
             Escríbenos por WhatsApp
           </a>
         </div>
-
         <address class="contact-info" aria-label="Información de contacto">
           <div class="contact-item">
             <i class="fab fa-whatsapp" aria-hidden="true"></i>
-            <div>
-              <strong>WhatsApp</strong>
-              <a href="https://wa.me/573155377469">+57 315 537 7469</a>
-            </div>
+            <div><strong>WhatsApp</strong><a href="https://wa.me/573155377469">+57 315 537 7469</a></div>
           </div>
           <div class="contact-item">
             <i class="fas fa-envelope" aria-hidden="true"></i>
-            <div>
-              <strong>Correo</strong>
-              <a href="mailto:gerenciarualesvelez@gmail.com">gerenciarualesvelez@gmail.com</a>
-            </div>
+            <div><strong>Correo</strong><a href="mailto:gerenciarualesvelez@gmail.com">gerenciarualesvelez@gmail.com</a></div>
           </div>
           <div class="contact-item">
             <i class="fas fa-location-dot" aria-hidden="true"></i>
-            <div>
-              <strong>Ubicación</strong>
-              <span>Medellín, Antioquia</span>
-            </div>
+            <div><strong>Ubicación</strong><span>Medellín, Antioquia</span></div>
           </div>
           <div class="contact-item">
             <i class="fas fa-clock" aria-hidden="true"></i>
-            <div>
-              <strong>Horario</strong>
-              <span>Lun – Vie: 8:00 a.m. – 6:00 p.m.<br />Sáb: 8:00 a.m. – 12:00 m.</span>
-            </div>
+            <div><strong>Horario</strong><span>Lun – Vie: 8:00 a.m. – 6:00 p.m.<br />Sáb: 8:00 a.m. – 12:00 m.</span></div>
           </div>
         </address>
-
       </div>
     </section>
 
@@ -409,7 +420,7 @@
     <div class="container footer-grid">
 
       <div class="footer-brand">
-        <a href="#inicio" aria-label="Ruales Vélez — volver al inicio">
+        <a href="#inicio" aria-label="Ruales Vélez — inicio">
           <img src="assets/logo.png" alt="Logo Ruales Vélez" class="footer-logo" width="80" height="80" loading="lazy" />
         </a>
         <p class="footer-brand-desc">Arquitectura, Diseño e Interventoría.</p>
@@ -442,26 +453,14 @@
       <div class="footer-social">
         <h3>SÍGUENOS</h3>
         <div class="social-links">
-          <a href="https://www.instagram.com/"
-             class="social-link"
-             target="_blank" rel="noopener noreferrer"
-             aria-label="Instagram de Ruales Vélez">
-            <i class="fab fa-instagram" aria-hidden="true"></i>
-            <span>Instagram</span>
+          <a href="https://www.instagram.com/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i><span>Instagram</span>
           </a>
-          <a href="https://www.facebook.com/"
-             class="social-link"
-             target="_blank" rel="noopener noreferrer"
-             aria-label="Facebook de Ruales Vélez">
-            <i class="fab fa-facebook" aria-hidden="true"></i>
-            <span>Facebook</span>
+          <a href="https://www.facebook.com/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <i class="fab fa-facebook" aria-hidden="true"></i><span>Facebook</span>
           </a>
-          <a href="https://www.linkedin.com/"
-             class="social-link"
-             target="_blank" rel="noopener noreferrer"
-             aria-label="LinkedIn de Ruales Vélez">
-            <i class="fab fa-linkedin" aria-hidden="true"></i>
-            <span>LinkedIn</span>
+          <a href="https://www.linkedin.com/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="fab fa-linkedin" aria-hidden="true"></i><span>LinkedIn</span>
           </a>
         </div>
       </div>
@@ -472,16 +471,12 @@
     </div>
   </footer>
 
-  <!-- WhatsApp flotante -->
   <a href="https://wa.me/573155377469?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto"
-     class="whatsapp-fab"
-     target="_blank" rel="noopener noreferrer"
-     aria-label="Contactar por WhatsApp">
+     class="whatsapp-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
     <i class="fab fa-whatsapp" aria-hidden="true"></i>
   </a>
 
-  <!-- Volver arriba -->
-  <button class="back-to-top" id="back-to-top" aria-label="Volver al inicio de la página" hidden>
+  <button class="back-to-top" id="back-to-top" aria-label="Volver al inicio" hidden>
     <i class="fas fa-chevron-up" aria-hidden="true"></i>
   </button>
 

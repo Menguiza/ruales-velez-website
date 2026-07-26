@@ -141,7 +141,8 @@ address { font-style: normal; }
 
 .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .nav-logo  {
-  width: 56px; height: 56px;
+  height: 44px;
+  width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
 }
@@ -308,70 +309,119 @@ address { font-style: normal; }
 .service-card h3 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; color: var(--text-dark); }
 .service-card p  { font-size: 0.83rem; color: var(--text-muted-l); line-height: 1.65; }
 
-/* ===== PROYECTOS ===== */
+/* ===== PROYECTOS — Slider Antes/Después ===== */
 .projects-section { background: var(--light-bg); padding-top: 0; }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   margin-bottom: 40px;
 }
+
 .project-card {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 3/4;
-  cursor: pointer;
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-.project-card:hover { transform: scale(1.025); box-shadow: var(--shadow-lg); }
-
-/* Imágenes reales + gradiente fallback */
-.project-card--1 {
-  background-color: #2C2015;
-  background-image: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=600&q=80');
-  background-size: cover; background-position: center;
-}
-.project-card--2 {
-  background-color: #1A2030;
-  background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=600&q=80');
-  background-size: cover; background-position: center;
-}
-.project-card--3 {
-  background-color: #1A2015;
-  background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80');
-  background-size: cover; background-position: center;
-}
-.project-card--4 {
-  background-color: #201515;
-  background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80');
-  background-size: cover; background-position: center;
-}
-.project-card--5 {
-  background-color: #1C1A15;
-  background-image: url('https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=600&q=80');
-  background-size: cover; background-position: center;
-}
-.project-card--6 {
-  background-color: #1E1A20;
-  background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80');
-  background-size: cover; background-position: center;
+  cursor: ew-resize;
+  background: #1A1A1A;
+  --split: 50%;
 }
 
-.project-card::before {
-  content: '';
+/* Wrapper que contiene ambas imágenes y el divisor */
+.ba-wrapper {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
 }
+
+.ba-before,
+.ba-after {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* La imagen "después" se recorta desde la derecha según --split */
+.ba-after {
+  clip-path: inset(0 calc(100% - var(--split)) 0 0);
+}
+
+/* Línea divisora */
+.ba-divider {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: var(--split);
+  width: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateX(-50%);
+  pointer-events: none;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+
+/* Círculo handle en el centro */
+.ba-handle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--dark);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+}
+
+/* Etiquetas ANTES / DESPUÉS */
+.ba-label {
+  position: absolute;
+  top: 14px;
+  z-index: 2;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  pointer-events: none;
+}
+.ba-label--before { left: 14px;  background: rgba(0,0,0,0.55); }
+.ba-label--after  { right: 14px; background: rgba(200,112,40,0.9); }
+
+/* Gradiente inferior para legibilidad del texto */
+.project-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
 .project-info {
   position: absolute;
   bottom: 20px; left: 20px; right: 20px;
   color: var(--white);
+  z-index: 2;
+  pointer-events: none;
 }
-.project-info h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 5px; }
-.project-info p  { font-size: 0.75rem; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 5px; }
+.project-info h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; }
+.project-info p  { font-size: 0.75rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 5px; }
+
+/* Animación de intro (hint) al entrar en viewport */
+@keyframes ba-hint {
+  0%   { --split: 50%; }
+  40%  { --split: 72%; }
+  70%  { --split: 30%; }
+  100% { --split: 50%; }
+}
+.project-card.ba-hint {
+  animation: ba-hint 1.4s ease-in-out forwards;
+}
 
 .projects-cta { text-align: center; }
 
@@ -570,7 +620,7 @@ address { font-style: normal; }
   .hero-content { padding: 64px 40px 64px 48px; }
   .services-grid { grid-template-columns: repeat(2,1fr); }
   .projects-grid { grid-template-columns: repeat(2,1fr); }
-  .hero-content { padding: 64px 40px 64px 48px; }
+  .hero-content  { padding: 64px 40px 64px 48px; }
   .about-process-grid { grid-template-columns: 1fr; gap: 60px; }
   .contact-grid { grid-template-columns: 1fr; gap: 52px; }
   .footer-grid  { grid-template-columns: 1fr 1fr; gap: 36px; }
