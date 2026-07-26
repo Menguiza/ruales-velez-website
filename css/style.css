@@ -129,6 +129,7 @@ address { font-style: normal; }
   height: 100vh; min-height: 680px;
   display: flex; align-items: center;
   overflow: hidden;
+  background: var(--dark);
 }
 
 /* Slideshow */

@@ -55,13 +55,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* ===== HERO SLIDESHOW ===== */
 (function initSlideshow() {
-  const slides    = document.querySelectorAll('.hero-slide');
-  const dotsWrap  = document.getElementById('hero-dots');
+  const slides   = document.querySelectorAll('.hero-slide');
+  const dotsWrap = document.getElementById('hero-dots');
   if (!slides.length) return;
 
-  let current  = 0;
-  let timer    = null;
-  const DELAY  = 5000;
+  let current = 0;
+  let timer   = null;
+  const DELAY = 5000;
+
+  // Mostrar la primera diapositiva SIN transición para evitar flash negro inicial
+  const firstSlide = slides[0];
+  firstSlide.style.transition = 'none';
+  firstSlide.style.opacity    = '1';
+  firstSlide.style.transform  = 'scale(1)';
+  // Tras dos frames re-habilitar transiciones para las siguientes diapositivas
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    firstSlide.style.transition = '';
+  }));
 
   // Crear dots
   slides.forEach((_, i) => {
@@ -73,11 +83,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 
   function goTo(index) {
-    slides[current].classList.remove('active');
-    slides[current].classList.add('prev');
-    dotsWrap.querySelectorAll('.hero-dot')[current].classList.remove('active');
-
-    setTimeout(() => slides[(index - 1 + slides.length) % slides.length].classList.remove('prev'), 1500);
+    const prevIdx = current;
+    slides[prevIdx].classList.remove('active');
+    slides[prevIdx].classList.add('prev');
+    dotsWrap.querySelectorAll('.hero-dot')[prevIdx].classList.remove('active');
+    setTimeout(() => slides[prevIdx].classList.remove('prev'), 1600);
 
     current = index;
     slides[current].classList.add('active');
@@ -88,7 +98,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   timer = setInterval(next, DELAY);
 
-  // Pausa en hover
   const hero = document.querySelector('.hero');
   hero.addEventListener('mouseenter', () => clearInterval(timer));
   hero.addEventListener('mouseleave', () => { timer = setInterval(next, DELAY); });
@@ -114,6 +123,7 @@ class BASlider {
   onMove(e) {
     const r = this.card.getBoundingClientRect();
     this.target = Math.max(2, Math.min(98, ((e.clientX - r.left) / r.width) * 100));
+    this.start(); // reactiva el loop si ya terminó
   }
 
   onTouch(e) {
