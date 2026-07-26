@@ -143,9 +143,7 @@ address { font-style: normal; }
 .nav-logo  {
   width: 56px; height: 56px;
   object-fit: contain;
-  border-radius: var(--radius);
-  background: var(--white);
-  padding: 4px;
+  filter: brightness(0) invert(1);
 }
 
 .nav-links {
@@ -479,9 +477,7 @@ address { font-style: normal; }
 .footer-logo {
   width: 80px; height: 80px;
   object-fit: contain;
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 8px;
+  filter: brightness(0) invert(1);
 }
 .footer-brand-desc {
   font-size: 0.84rem;
