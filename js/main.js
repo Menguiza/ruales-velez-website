@@ -1,23 +1,28 @@
 /* Ruales Vélez — main.js */
 
-const header    = document.getElementById('site-header');
-const navToggle = document.getElementById('nav-toggle');
-const navMenu   = document.getElementById('nav-menu');
-const backToTop = document.getElementById('back-to-top');
+/* ===== REFERENCIAS ===== */
+const header      = document.getElementById('site-header');
+const navToggle   = document.getElementById('nav-toggle');
+const navMenu     = document.getElementById('nav-menu');
+const backToTop   = document.getElementById('back-to-top');
+const progressBar = document.querySelector('.scroll-progress');
 
-/* ===== SCROLL ===== */
+/* ===== SCROLL: progress + header + back-to-top + nav activo ===== */
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 20);
-  backToTop.toggleAttribute('hidden', window.scrollY <= 400);
+  const y   = window.scrollY;
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+
+  progressBar.style.transform = `scaleX(${y / max})`;
+  header.classList.toggle('scrolled', y > 80);
+  backToTop.toggleAttribute('hidden', y <= 400);
   highlightNav();
 }, { passive: true });
 
-/* ===== NAV ACTIVO ===== */
 function highlightNav() {
   const sections = document.querySelectorAll('section[id], div[id]');
   const links    = document.querySelectorAll('.nav-link');
   let current    = '';
-  sections.forEach(sec => { if (sec.offsetTop - 100 <= window.scrollY) current = sec.id; });
+  sections.forEach(sec => { if (sec.offsetTop - 120 <= window.scrollY) current = sec.id; });
   links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
 }
 
@@ -27,19 +32,13 @@ navToggle.addEventListener('click', () => {
   navToggle.setAttribute('aria-expanded', open);
 });
 navMenu.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', () => { navMenu.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); });
 });
 document.addEventListener('click', e => {
-  if (!header.contains(e.target)) {
-    navMenu.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  }
+  if (!header.contains(e.target)) { navMenu.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); }
 });
 
-/* ===== VOLVER ARRIBA ===== */
+/* ===== BACK TO TOP ===== */
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 /* ===== SMOOTH SCROLL CON OFFSET ===== */
@@ -50,35 +49,60 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
-    window.scrollTo({ top: target.offsetTop - headerH, behavior: 'smooth' });
+    window.scrollTo({ top: target.offsetTop - (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72), behavior: 'smooth' });
   });
 });
 
-/* ===== ANIMACIONES DE ENTRADA ===== */
-const animTargets = document.querySelectorAll(
-  '.service-card, .value-item, .process-step, .about-col, .process-col, .contact-cta, .contact-info, .section-header'
-);
-animTargets.forEach(el => el.classList.add('fade-in'));
+/* ===== HERO SLIDESHOW ===== */
+(function initSlideshow() {
+  const slides    = document.querySelectorAll('.hero-slide');
+  const dotsWrap  = document.getElementById('hero-dots');
+  if (!slides.length) return;
 
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 70);
-      fadeObserver.unobserve(entry.target);
-    }
+  let current  = 0;
+  let timer    = null;
+  const DELAY  = 5000;
+
+  // Crear dots
+  slides.forEach((_, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', `Diapositiva ${i + 1}`);
+    btn.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(btn);
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-animTargets.forEach(el => fadeObserver.observe(el));
 
-/* ===== SLIDER ANTES/DESPUÉS ===== */
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    slides[current].classList.add('prev');
+    dotsWrap.querySelectorAll('.hero-dot')[current].classList.remove('active');
+
+    setTimeout(() => slides[(index - 1 + slides.length) % slides.length].classList.remove('prev'), 1500);
+
+    current = index;
+    slides[current].classList.add('active');
+    dotsWrap.querySelectorAll('.hero-dot')[current].classList.add('active');
+  }
+
+  function next() { goTo((current + 1) % slides.length); }
+
+  timer = setInterval(next, DELAY);
+
+  // Pausa en hover
+  const hero = document.querySelector('.hero');
+  hero.addEventListener('mouseenter', () => clearInterval(timer));
+  hero.addEventListener('mouseleave', () => { timer = setInterval(next, DELAY); });
+})();
+
+/* ===== ANTES/DESPUÉS — Slider con lerp ===== */
 class BASlider {
   constructor(card) {
     this.card    = card;
+    this.after   = card.querySelector('.ba-after');
+    this.divider = card.querySelector('.ba-divider');
     this.target  = 50;
     this.current = 50;
     this.running = false;
-    this.hinted  = false;
 
     card.addEventListener('mouseenter',  () => this.start());
     card.addEventListener('mousemove',   e  => this.onMove(e));
@@ -89,12 +113,12 @@ class BASlider {
 
   onMove(e) {
     const r = this.card.getBoundingClientRect();
-    this.target = Math.max(3, Math.min(97, ((e.clientX - r.left) / r.width) * 100));
+    this.target = Math.max(2, Math.min(98, ((e.clientX - r.left) / r.width) * 100));
   }
 
   onTouch(e) {
     const r = this.card.getBoundingClientRect();
-    this.target = Math.max(3, Math.min(97, ((e.touches[0].clientX - r.left) / r.width) * 100));
+    this.target = Math.max(2, Math.min(98, ((e.touches[0].clientX - r.left) / r.width) * 100));
     this.start();
   }
 
@@ -105,34 +129,114 @@ class BASlider {
   }
 
   tick() {
-    this.current += (this.target - this.current) * 0.1;   // factor lerp
-    this.card.style.setProperty('--split', this.current.toFixed(2) + '%');
+    this.current += (this.target - this.current) * 0.10;
+    const pct = this.current.toFixed(2);
+
+    // Aplica clip-path directamente: muestra "después" a la DERECHA del cursor
+    this.after.style.clipPath   = `inset(0 0 0 ${pct}%)`;
+    this.divider.style.left     = pct + '%';
 
     if (Math.abs(this.target - this.current) < 0.05) {
       this.current = this.target;
-      this.card.style.setProperty('--split', this.current + '%');
+      this.after.style.clipPath = `inset(0 0 0 ${this.target}%)`;
+      this.divider.style.left   = this.target + '%';
       this.running = false;
       return;
     }
     requestAnimationFrame(() => this.tick());
   }
+
+  /* Animación de "hint": revela después → esconde → vuelve al centro */
+  async hint() {
+    await this.lerpTo(22, 700);
+    await this.lerpTo(78, 900);
+    await this.lerpTo(50, 600);
+  }
+
+  lerpTo(target, duration) {
+    return new Promise(resolve => {
+      const start = this.current;
+      const begin = performance.now();
+      const step  = now => {
+        const t   = Math.min((now - begin) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);  // ease-out-cubic
+        this.current = start + (target - start) * ease;
+        this.after.style.clipPath = `inset(0 0 0 ${this.current.toFixed(2)}%)`;
+        this.divider.style.left   = this.current.toFixed(2) + '%';
+        if (t < 1) requestAnimationFrame(step);
+        else { this.current = target; resolve(); }
+      };
+      requestAnimationFrame(step);
+    });
+  }
 }
 
-/* Hint de entrada: anima la primera vez que la tarjeta entra en viewport */
+// Inicializar sliders y hint al entrar en viewport
 const baCards = document.querySelectorAll('.project-card');
-baCards.forEach(card => new BASlider(card));
+const sliders = [];
+baCards.forEach(card => sliders.push(new BASlider(card)));
 
-const hintObserver = new IntersectionObserver((entries) => {
+const hintObs = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => {
-        entry.target.classList.add('ba-hint');
-        entry.target.addEventListener('animationend', () => {
-          entry.target.classList.remove('ba-hint');
-        }, { once: true });
-      }, 300 + i * 150);
-      hintObserver.unobserve(entry.target);
+      const slider = sliders[Array.from(baCards).indexOf(entry.target)];
+      setTimeout(() => { if (slider && !slider.running) slider.hint(); }, 400 + i * 180);
+      hintObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.3 });
-baCards.forEach(card => hintObserver.observe(card));
+}, { threshold: 0.4 });
+baCards.forEach(card => hintObs.observe(card));
+
+/* ===== ANIMACIONES DE ENTRADA (fade-in) ===== */
+const fadeTargets = document.querySelectorAll('.service-card, .value-item, .process-step, .about-col, .process-col, .contact-cta, .contact-info, .section-header');
+fadeTargets.forEach(el => el.classList.add('fade-in'));
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 70);
+      fadeObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+fadeTargets.forEach(el => fadeObs.observe(el));
+
+/* ===== CONTADOR DE NÚMEROS ===== */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const ease     = 1 - Math.pow(1 - progress, 4);  // ease-out-quart
+    el.textContent = Math.floor(ease * target) + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.value-number').forEach(el => counterObs.observe(el));
+
+/* ===== TILT 3D EN TARJETAS DE SERVICIO ===== */
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width  - 0.5) * 16;
+    const y = ((e.clientY - r.top)  / r.height - 0.5) * 16;
+    card.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${-y}deg) translateZ(6px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
