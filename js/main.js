@@ -58,7 +58,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (!target) return;
     e.preventDefault();
     const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
-    window.scrollTo({ top: absoluteTop(target) - headerH, behavior: 'smooth' });
+    window.scrollTo({ top: absoluteTop(target) - headerH - 24, behavior: 'smooth' });
   });
 });
 
