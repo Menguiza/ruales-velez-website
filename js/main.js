@@ -42,6 +42,14 @@ document.addEventListener('click', e => {
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 /* ===== SMOOTH SCROLL CON OFFSET ===== */
+// Recorre la cadena offsetParent para obtener la posición de layout real
+// (getBoundingClientRect incluye transforms del fade-in y da posición incorrecta)
+function absoluteTop(el) {
+  let top = 0;
+  while (el) { top += el.offsetTop; el = el.offsetParent; }
+  return top;
+}
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
     const id = anchor.getAttribute('href');
@@ -50,9 +58,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (!target) return;
     e.preventDefault();
     const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
-    // getBoundingClientRect().top da la distancia al viewport; + scrollY = posición absoluta en la página
-    const top = target.getBoundingClientRect().top + window.scrollY - headerH;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top: absoluteTop(target) - headerH, behavior: 'smooth' });
   });
 });
 
