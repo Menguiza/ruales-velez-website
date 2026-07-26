@@ -58,7 +58,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     if (!target) return;
     e.preventDefault();
     const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 72;
-    window.scrollTo({ top: absoluteTop(target) - headerH - 24, behavior: 'smooth' });
+    const isLast = id === '#contacto';
+    const top = isLast
+      ? document.documentElement.scrollHeight
+      : absoluteTop(target) - headerH - 24;
+    window.scrollTo({ top, behavior: 'smooth' });
   });
 });
 
